@@ -1,7 +1,8 @@
-import React from "react";
+import { useState, useEffect } from "react";
+import { Box, Button, TextField, Typography, Stack } from "@mui/material";
 
 const SearchExercises = () => {
-  return <div></div>;
+  return <Box>SearchExercises</Box>;
 };
 
 export default SearchExercises;
