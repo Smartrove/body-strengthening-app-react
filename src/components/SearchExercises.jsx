@@ -1,7 +1,44 @@
 import { useState, useEffect } from "react";
 import { Box, Button, TextField, Typography, Stack } from "@mui/material";
+import { options, fetchData } from "../utils/fetchData";
+import HorizontalScrollbar from "./HorizontalScrollbar";
 
-const SearchExercises = () => {
+const SearchExercises = ({ setExercises, bodyPart, setBodyPart }) => {
+  const [search, setSearch] = useState("");
+  const [bodyParts, setBodyParts] = useState([]);
+  // console.log({ search });
+
+  useEffect(() => {
+    const fetchingExerciseData = async () => {
+      const bodyPartData = await fetchData(
+        "https://zylalabs.com/api/392/exercise+database+api/309/list+of+body+parts",
+        options
+      );
+      // console.log({ bodyPartData });
+      setBodyPart(["all", ...bodyPartData]);
+    };
+
+    fetchingExerciseData();
+  }, []);
+
+  const handleSearch = async () => {
+    if (search) {
+      const exerciseData = await fetchData(
+        "https://zylalabs.com/api/392/exercise+database+api/313/list+of+all+exercise",
+        options
+      );
+      const searchedExercises = exerciseData.filter(
+        (exercise) =>
+          exercise.name.toLowerCase().includes(search) ||
+          exercise.target.toLowerCase().includes(search) ||
+          exercise.equipment.toLowerCase().includes(search) ||
+          exercise.bodyPart.toLowerCase().includes(search)
+      );
+      setExercises("");
+      setExercises(searchedExercises);
+      console.log({ exerciseData });
+    }
+  };
   return (
     <Stack alignItems="center" mt="37px" justifyContent="center" p="20px">
       <Typography
@@ -29,8 +66,10 @@ const SearchExercises = () => {
             borderRadius: "40px",
           }}
           height="76px"
-          value=""
-          onChange={(e) => {}}
+          value={search}
+          onChange={(e) => {
+            setSearch(e.target.value.toLowerCase());
+          }}
           placeholder="Search exercises"
           type="text"
         />
@@ -52,9 +91,17 @@ const SearchExercises = () => {
             right: "0",
           }}
           className="search-btn"
+          onClick={handleSearch}
         >
           Search
         </Button>
+      </Box>
+      <Box sx={{ position: "relative", padding: "20px", width: "100%" }}>
+        <HorizontalScrollbar
+          data={bodyParts}
+          bodyPart={bodyPart}
+          setBodyPart={setBodyPart}
+        />
       </Box>
     </Stack>
   );
