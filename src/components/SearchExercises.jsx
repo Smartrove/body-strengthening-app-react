@@ -14,8 +14,8 @@ const SearchExercises = ({ setExercises, bodyPart, setBodyPart }) => {
         "https://zylalabs.com/api/392/exercise+database+api/309/list+of+body+parts",
         options
       );
-      // console.log({ bodyPartData });
-      setBodyPart(["all", ...bodyPartData]);
+      console.log({ bodyPartData });
+      setBodyParts(["all", ...bodyPartData]);
     };
 
     fetchingExerciseData();
@@ -96,7 +96,7 @@ const SearchExercises = ({ setExercises, bodyPart, setBodyPart }) => {
           Search
         </Button>
       </Box>
-      <Box sx={{ position: "relative", padding: "20px", width: "100%" }}>
+      <Box sx={{ position: "relative", width: "100%", p: "20px" }}>
         <HorizontalScrollbar
           data={bodyParts}
           bodyPart={bodyPart}
