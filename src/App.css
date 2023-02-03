@@ -9,9 +9,10 @@ body {
   box-sizing: border-box;
 }
 
-/* ::-webkit-scrollbar {
-  width: 0px;
-} */
+::-webkit-scrollbar {
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
 
 .right-arrow,
 .left-arrow {

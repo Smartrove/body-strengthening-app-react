@@ -14,7 +14,7 @@ const SearchExercises = ({ setExercises, bodyPart, setBodyPart }) => {
         "https://zylalabs.com/api/392/exercise+database+api/309/list+of+body+parts",
         options
       );
-      console.log({ bodyPartData });
+      // console.log({ bodyPartData });
       setBodyParts(["all", ...bodyPartData]);
     };
 
@@ -36,7 +36,7 @@ const SearchExercises = ({ setExercises, bodyPart, setBodyPart }) => {
       );
       setExercises("");
       setExercises(searchedExercises);
-      console.log({ exerciseData });
+      // console.log({ exerciseData });
     }
   };
   return (
